@@ -4,7 +4,7 @@
 var submitBtn = $(".saveBtn");
 var currentTime = dayjs().format("HH");
 // var hourSelected = {
-//   hour9: $("#hour-9"),
+//   hour9: $("#hour-9").children(".hour").text(),
 //   hour10: $("#hour-10"),
 //   hour11: $("#hour-11"),
 //   hour12: $("#hour-12"),
@@ -14,7 +14,7 @@ var currentTime = dayjs().format("HH");
 //   hour16: $("#hour-4"),
 //   hour17: $("#hour-5"),
 // };
-
+// console.log(hourSelected)
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -25,18 +25,22 @@ $(function () {
 
   submitBtn.on("click", function (event) {
     event.preventDefault();
-    var hour = $(this).siblings(".hour");
+    var hour = $(this).siblings(".hour").text();
     var toDo = $(this).siblings(".description").val();
-    hourSelected = [];
-    $.each(hour, function () {
-      hourSelected.push($(this));
-    });
-    console.log(hourSelected);
     var userInput = {
-      time: hourSelected,
+      time: hour,
       todo: toDo,
     };
-    localStorage.setItem("To-Do's", JSON.stringify(userInput));
+    if (userInput) {
+      var newInput = {
+        time: hour,
+        todo: toDo,
+      };
+      userInput = JSON.parse(localStorage.getItem("To-Do's")) || [];
+      userInput.push(newInput);
+      localStorage.setItem("To-Do's", JSON.stringify(userInput));
+    }
+
     // renderMessage();
   });
   // function renderMessage() {
