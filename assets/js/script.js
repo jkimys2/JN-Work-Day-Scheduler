@@ -3,6 +3,17 @@
 // in the html.
 var submitBtn = $(".saveBtn");
 var currentTime = dayjs().format("HH");
+// var hourSelected = {
+//   hour9: $("#hour-9"),
+//   hour10: $("#hour-10"),
+//   hour11: $("#hour-11"),
+//   hour12: $("#hour-12"),
+//   hour13: $("#hour-1"),
+//   hour14: $("#hour-2"),
+//   hour15: $("#hour-3"),
+//   hour16: $("#hour-4"),
+//   hour17: $("#hour-5"),
+// };
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
@@ -12,10 +23,20 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
-    submitBtn.on("click", function (event) {
+  submitBtn.on("click", function (event) {
     event.preventDefault();
-    
-    localStorage.setItem("To-Do's", JSON.stringify(userInput))
+    var hour = $(this).siblings(".hour");
+    var toDo = $(this).siblings(".description").val();
+    hourSelected = [];
+    $.each(hour, function () {
+      hourSelected.push($(this));
+    });
+    console.log(hourSelected);
+    var userInput = {
+      time: hourSelected,
+      todo: toDo,
+    };
+    localStorage.setItem("To-Do's", JSON.stringify(userInput));
     // renderMessage();
   });
   // function renderMessage() {
@@ -36,12 +57,11 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
 
-
   // TODO: Add code to display the current date in the header of the page.
   function displayDate() {
     var currentDate = dayjs().format("dddd, MMMM Do, HH:mm:ss");
     $("#currentDay").text(currentDate);
-  };
+  }
   displayDate();
   setInterval(displayDate, 1000);
 });
