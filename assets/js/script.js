@@ -46,9 +46,9 @@ $(function () {
   });
 
   function renderMessage() {
-    var headerEl = $("lead");
+    var headerEl = $("#heading");
     var saveEl = $("<p>");
-    saveEl.text("Appointment added to LocalStorage ✅");
+    saveEl.text("Appointment added to localStorage ✅");
     headerEl.append(saveEl);
   }
 
