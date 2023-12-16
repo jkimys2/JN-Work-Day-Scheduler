@@ -5,15 +5,26 @@ var submitBtn = $(".saveBtn");
 var currentTime = dayjs().format("HH");
 var hourEl = $(".hour");
 var textEl = $(".description");
-var hour9 = $("#hour-9");
-var hour10 = $("#hour-10");
-var hour11 = $("#hour-11");
-var hour12 = $("#hour-12");
-var hour13 = $("#hour-1");
-var hour14 = $("#hour-2");
-var hour15 = $("#hour-3");
-var hour16 = $("#hour-4");
-var hour17 = $("#hour-5");
+var currentHour = {
+hour9: $("#hour-9"),
+hour10: $("#hour-10"),
+hour11: $("#hour-11"),
+hour12: $("#hour-12"),
+hour13: $("#hour-1"),
+hour14: $("#hour-2"),
+hour15: $("#hour-3"),
+hour16: $("#hour-4"),
+hour17: $("#hour-5"),
+}
+// var hour9 = $("#hour-9");
+// var hour10 = $("#hour-10");
+// var hour11 = $("#hour-11");
+// var hour12 = $("#hour-12");
+// var hour13 = $("#hour-1");
+// var hour14 = $("#hour-2");
+// var hour15 = $("#hour-3");
+// var hour16 = $("#hour-4");
+// var hour17 = $("#hour-5");
 
 // console.log(hourSelected)
 $(function () {
@@ -24,15 +35,15 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   function displayToDo() {
-    hour9.children(1).val(localStorage.getItem("9AM"));
-    hour10.children(1).val(localStorage.getItem("10AM"));
-    hour11.children(1).val(localStorage.getItem("11AM"));
-    hour12.children(1).val(localStorage.getItem("12PM"));
-    hour13.children(1).val(localStorage.getItem("1PM"));
-    hour14.children(1).val(localStorage.getItem("2PM"));
-    hour15.children(1).val(localStorage.getItem("3PM"));
-    hour16.children(1).val(localStorage.getItem("4PM"));
-    hour17.children(1).val(localStorage.getItem("5PM"));
+    currentHour.hour9.children(1).val(localStorage.getItem("9AM"));
+    currentHour.hour10.children(1).val(localStorage.getItem("10AM"));
+    currentHour.hour11.children(1).val(localStorage.getItem("11AM"));
+    currentHour.hour12.children(1).val(localStorage.getItem("12PM"));
+    currentHour.hour13.children(1).val(localStorage.getItem("1PM"));
+    currentHour.hour14.children(1).val(localStorage.getItem("2PM"));
+    currentHour.hour15.children(1).val(localStorage.getItem("3PM"));
+    currentHour.hour16.children(1).val(localStorage.getItem("4PM"));
+    currentHour.hour17.children(1).val(localStorage.getItem("5PM"));
   }
   displayToDo();
 
