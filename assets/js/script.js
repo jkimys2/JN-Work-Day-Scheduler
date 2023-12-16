@@ -26,8 +26,8 @@ $(function () {
   });
 
   function renderMessage() {
-    saveEl.empty()
-    var pTag = $("<p>")
+    saveEl.empty();
+    var pTag = $("<p>");
     pTag.text("Appointment added to localStorage ✅");
     headerEl.append(saveEl.append(pTag));
   }
@@ -38,25 +38,24 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
- 
+
   function timeBlockColor() {
     $(".time-block").each(function () {
-
-var rowHour = parseInt($(this).attr("id").split("-").pop());
-if (rowHour < currentHour) {
-  $(this).children(".description").removeClass("present")
-  $(this).children(".description").removeClass("future")
-  $(this).children(".description").addClass("past")
-} else if (rowHour === currentHour) {
-  $(this).children(".description").removeClass("past")
-  $(this).children(".description").removeClass("future")
-  $(this).children(".description").addClass("present")
-} else {
-  $(this).children(".description").removeClass("past")
-  $(this).children(".description").removeClass("present")
-  $(this).children(".description").addClass("future")
-}
-  })
+      var rowHour = parseInt($(this).attr("id").split("-").pop());
+      if (rowHour < currentHour) {
+        $(this).children(".description").removeClass("present");
+        $(this).children(".description").removeClass("future");
+        $(this).children(".description").addClass("past");
+      } else if (rowHour === currentHour) {
+        $(this).children(".description").removeClass("past");
+        $(this).children(".description").removeClass("future");
+        $(this).children(".description").addClass("present");
+      } else {
+        $(this).children(".description").removeClass("past");
+        $(this).children(".description").removeClass("present");
+        $(this).children(".description").addClass("future");
+      }
+    });
   }
 
   timeBlockColor();
@@ -67,7 +66,9 @@ if (rowHour < currentHour) {
 
   function displayToDo() {
     for (var i = 9; i < 18; i++) {
-      $("#hour-"+i).children(1).val(localStorage.getItem("hour-"+i))
+      $("#hour-" + i)
+        .children(1)
+        .val(localStorage.getItem("hour-" + i));
     }
   }
 
