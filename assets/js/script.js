@@ -2,7 +2,7 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var submitBtn = $(".saveBtn");
-var currentHour = dayjs().format("HH");
+var currentHour = dayjs().hour();
 var hourEl = $(".hour");
 var textEl = $(".description");
 var hourBlockEl = {
@@ -28,9 +28,9 @@ $(function () {
 
   submitBtn.on("click", function (event) {
     event.preventDefault();
-    var hour = $(this).siblings(".hour").text();
+    var hour = $(this).parent().attr("id");
     var toDo = $(this).siblings(".description").val();
-
+console.log(hour)
     localStorage.setItem(hour, toDo);
     renderMessage();
   });
@@ -48,22 +48,26 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
+ 
   function timeBlockColor() {
-    $.each(hourBlockEl, function () {
+    $(".time-block").each(function () {
       // var hourNumber = hourBlockEl.replace(/hour/, "");
       // console.log(hourNumber)
-
-      if (currentHour < hourBlockEl) {
-        hourBlockEl.addClass(".past");
-        hourBlockEl.removeClass(".present .future");
-      } else if (currentHour === hourBlockEl) {
-        hourBlockEl.addClass(".present");
-        hourBlockEl.removeClass(".past .future");
-      } else if (currentHour > hourBlockEl) {
-        hourBlockEl.addClass(".future");
-        hourBlockEl.removeClass(".past .present");
-      }
-    });
+var rowHour = parseInt($(this).attr("id").split("-").pop());
+if (rowHour < currentHour) {
+  $(this).children(".description").removeClass("present")
+  $(this).children(".description").removeClass("future")
+  $(this).children(".description").addClass("past")
+} else if (rowHour === currentHour) {
+  $(this).children(".description").removeClass("past")
+  $(this).children(".description").removeClass("future")
+  $(this).children(".description").addClass("present")
+} else {
+  $(this).children(".description").removeClass("past")
+  $(this).children(".description").removeClass("present")
+  $(this).children(".description").addClass("future")
+}
+  })
   }
 
   timeBlockColor();
@@ -71,16 +75,20 @@ $(function () {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
+
   function displayToDo() {
-    $("#hour-9").children(1).val(localStorage.getItem("9AM"));
-    $("#hour-10").children(1).val(localStorage.getItem("10AM"));
-    $("#hour-11").children(1).val(localStorage.getItem("11AM"));
-    $("#hour-12").children(1).val(localStorage.getItem("12PM"));
-    $("#hour-1").children(1).val(localStorage.getItem("1PM"));
-    $("#hour-2").children(1).val(localStorage.getItem("2PM"));
-    $("#hour-3").children(1).val(localStorage.getItem("3PM"));
-    $("#hour-4").children(1).val(localStorage.getItem("4PM"));
-    $("#hour-5").children(1).val(localStorage.getItem("5PM"));
+    for (var i = 9; i < 18; i++) {
+      $("#hour-"+i).children(1).val(localStorage.getItem("hour-"+i))
+    }
+    // $("#hour-9").children(1).val(localStorage.getItem("9AM"));
+    // $("#hour-10").children(1).val(localStorage.getItem("10AM"));
+    // $("#hour-11").children(1).val(localStorage.getItem("11AM"));
+    // $("#hour-12").children(1).val(localStorage.getItem("12PM"));
+    // $("#hour-1").children(1).val(localStorage.getItem("1PM"));
+    // $("#hour-2").children(1).val(localStorage.getItem("2PM"));
+    // $("#hour-3").children(1).val(localStorage.getItem("3PM"));
+    // $("#hour-4").children(1).val(localStorage.getItem("4PM"));
+    // $("#hour-5").children(1).val(localStorage.getItem("5PM"));
   }
 
   // TODO: Add code to display the current date in the header of the page.
